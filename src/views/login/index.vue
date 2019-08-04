@@ -16,7 +16,7 @@
           <el-button>发送验证码</el-button>
         </el-form-item>
         <el-form-item>
-          <el-checkbox :value="true">我已阅读并同意用户协议和隐私条款</el-checkbox>
+          <el-checkbox :class="{checked:change}">我已阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" style="width:100%" @click="login()">登 录</el-button>
@@ -39,8 +39,8 @@ export default {
     return {
       // 表单对象数据
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '18332262351',
+        code: '246810'
       },
       // 表单校验规则数据
       loginRules: {
@@ -52,7 +52,8 @@ export default {
           { required: true, message: '请输入验证码', trigger: 'blur' },
           { len: 6, message: '长度是6位', trigger: 'blur' }
         ]
-      }
+      },
+      change: true
     }
   },
   methods: {
@@ -67,8 +68,8 @@ export default {
             )
             .then(res => {
               // res 响应对象 包含响应主体
-              console.log(res.data)
-              this.$router.push('/')
+              // console.log(res.data)
+              this.$router.push('/welcome')
             })
             .catch(() => {
               // 提示错误
