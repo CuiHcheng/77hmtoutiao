@@ -3,7 +3,7 @@
     <el-card class="my-card">
       <img src="../../assets/images/logo_index.png" alt />
       <!-- 表单 -->
-      <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
+      <el-form ref="loginForm" :model="loginForm" :rules="loginRules" status-icon>
         <el-form-item prop="mobile">
           <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import store from '@/store'
+
 export default {
   data () {
     // 声明校验函数
@@ -68,7 +70,8 @@ export default {
             )
             .then(res => {
               // res 响应对象 包含响应主体
-              // console.log(res.data)
+              store.setUser(res.data.data)
+              // 跳转去首页
               this.$router.push('/welcome')
             })
             .catch(() => {

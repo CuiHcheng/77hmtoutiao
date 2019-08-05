@@ -8,7 +8,7 @@ import '@/style/index.less'
 
 import router from '@/router'
 
-import axios from 'axios'
+import axios from '@/api'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI)

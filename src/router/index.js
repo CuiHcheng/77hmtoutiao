@@ -11,8 +11,10 @@ import Comment from '@/views/comment/comment.vue'
 import Fans from '@/views/fans/fans.vue'
 import Publish from '@/views/publish/publish.vue'
 import Setting from '@/views/setting/setting.vue'
-
 import Four from '@/views/404/four.vue'
+
+import store from '../store'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -33,8 +35,22 @@ const router = new VueRouter({
         { path: '/setting', name: 'setting', component: Setting }
       ]
     },
+    // 处理404
     { path: '*', name: 'four', component: Four }
   ]
+})
+
+// 前置导航守卫
+router.beforeEach((to, from, next) => {
+  // // 判断是不是登录路由哦
+  // if (to.path === '/login') return next()
+  // // 判断是否登录
+  // if (!store.gitUser().token) return next('/login')
+  // // 放行
+  // next()
+
+  if (to.path !== '/login' && !store.getUser().token) return next('/login')
+  next()
 })
 
 export default router
